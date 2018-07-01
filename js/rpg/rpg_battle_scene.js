@@ -4,18 +4,27 @@ function RPGBattleScene() {
     turnManager.addCombatantsToQueue(partyMembers);
     turnManager.addCombatantsToQueue(enemies);
     this.turnManager = turnManager;
+
+    this.currentTurnCombatant = null;
+    this.currentTurnCombatantName = "";
   };
   this.init();
 
   this.update = function() {
-    var currentTurnCombatant = this.turnManager.popCombatant();
-    if (currentTurnCombatant) {
-      console.log(this.turnManager.battleTimer);
-      console.log(currentTurnCombatant);
+    if (this.currentTurnCombatant) {
       // Do nothing for now; put back in the queue
-      this.turnManager.addCombatantToQueue(currentTurnCombatant);
+      this.turnManager.addCombatantToQueue(this.currentTurnCombatant);
+      this.currentTurnCombatant = null;
     }
-    this.turnManager.tick();
+    else {
+      // Wait for the next character to make a move
+      var currentTurnCombatant = this.turnManager.popCombatant();
+      if (currentTurnCombatant) {
+        this.currentTurnCombatant = currentTurnCombatant;
+        this.currentTurnCombatantName = currentTurnCombatant.name;
+      }
+      this.turnManager.tick();
+    }
   };
 
   this.draw = function() {
@@ -42,6 +51,9 @@ function RPGBattleScene() {
       drawText(HPText, textX + 220, textY, 'black', 'right', 'top');
       textY += 30;
     }
+
+    var turnText = this.currentTurnCombatantName + "'s Turn";
+    drawText(turnText, GAME_WIDTH/2, 420, 'black', 'center', 'top');
 
     drawText(this.turnManager.battleTimer, GAME_WIDTH/2, 450, 'black', 'center', 'top');
   };
