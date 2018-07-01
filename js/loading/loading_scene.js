@@ -15,7 +15,6 @@ function LoadingScene() {
   };
 
   this.draw = function() {
-    drawRect(0, 0, GAME_WIDTH, GAME_HEIGHT, 'black');
-    drawText("SPLASH SCREEN SHOULD SHOW HERE", GAME_WIDTH/2, GAME_HEIGHT/2, 'white', 'center', 'middle');
+    canvasContext.drawImage(splashScreenImage, 0, 0);
   };
 }
