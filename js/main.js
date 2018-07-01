@@ -3,6 +3,8 @@ const GAME_HEIGHT = 480;
 const FPS = 30;
 
 var canvas, canvasContext;
+var currentScene;
+var nextScene;
 
 window.addEventListener("load", function(event) {
   canvas = document.createElement('canvas');
@@ -11,8 +13,23 @@ window.addEventListener("load", function(event) {
   document.body.appendChild(canvas);
   canvasContext = canvas.getContext('2d');
 
-  drawRect(0, 0, GAME_WIDTH, GAME_HEIGHT, 'black');
-  drawText("LOADING ASSETS", GAME_WIDTH/2, GAME_HEIGHT/2, 'white', 'center', 'middle');
-
-  // TODO: implement a LoadingScene
+  currentScene = new LoadingLoadingScene();
+  setInterval(eachFrame, 1000/FPS);
 });
+
+function eachFrame() {
+  updateGame();
+  drawGame();
+  if (nextScene) {
+    currentScene = nextScene;
+    nextScene = null;
+  }
+}
+
+function updateGame() {
+  currentScene.update();
+}
+
+function drawGame() {
+  currentScene.draw();
+}
