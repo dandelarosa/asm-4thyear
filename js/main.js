@@ -13,6 +13,7 @@ window.addEventListener("load", function(event) {
   document.body.appendChild(canvas);
   canvasContext = canvas.getContext('2d');
 
+  initGameState();
   currentScene = new LoadingLoadingScene();
   setInterval(eachFrame, 1000/FPS);
 });

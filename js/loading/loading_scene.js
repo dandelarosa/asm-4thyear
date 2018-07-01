@@ -1,7 +1,7 @@
 function LoadingScene() {
   this.init = function() {
     // In actuality we would load the rest of the game assets, but for now just make sure this thing even renders
-    this.loadTimer = 60;
+    this.loadTimer = 15;
   };
   this.init();
 
