@@ -1,9 +1,21 @@
 function RPGBattleScene() {
   this.init = function() {
+    var turnManager = new TurnManager();
+    turnManager.addCombatantsToQueue(partyMembers);
+    turnManager.addCombatantsToQueue(enemies);
+    this.turnManager = turnManager;
   };
   this.init();
 
   this.update = function() {
+    var currentTurnCombatant = this.turnManager.popCombatant();
+    if (currentTurnCombatant) {
+      console.log(this.turnManager.battleTimer);
+      console.log(currentTurnCombatant);
+      // Do nothing for now; put back in the queue
+      this.turnManager.addCombatantToQueue(currentTurnCombatant);
+    }
+    this.turnManager.tick();
   };
 
   this.draw = function() {
@@ -30,5 +42,7 @@ function RPGBattleScene() {
       drawText(HPText, textX + 220, textY, 'black', 'right', 'top');
       textY += 30;
     }
+
+    drawText(this.turnManager.battleTimer, GAME_WIDTH/2, 450, 'black', 'center', 'top');
   };
 }

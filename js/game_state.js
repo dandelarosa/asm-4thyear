@@ -11,16 +11,19 @@ function initGameState() {
       name: "David",
       currentHP: 100,
       maxHP: 100,
+      ticksToNextTurn: 40,
     },
     {
       name: "Shane",
       currentHP: 100,
       maxHP: 100,
+      ticksToNextTurn: 50,
     },
     {
       name: "Luke",
       currentHP: 100,
       maxHP: 100,
+      ticksToNextTurn: 60,
     }
   ];
 
