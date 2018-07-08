@@ -18,6 +18,8 @@ function RPGBattleScene() {
       if (this.currentMenu) {
         this.currentMenu.update();
         if (this.currentMenu.done) {
+          var currentAction = this.currentMenu.selectedAction;
+          currentAction.applyEffects();
           this.currentMenu = null;
         }
       }
@@ -39,7 +41,7 @@ function RPGBattleScene() {
         var currentTurnCombatantName = currentTurnCombatant.name;
         this.currentDescription = currentTurnCombatantName + "'s Turn";
         // TODO: skip menu if character is controlled by AI
-        this.currentMenu = new MainBattleMenu(100, 100);
+        this.currentMenu = new MainBattleMenu(currentTurnCombatant);
       }
       else {
         this.turnManager.tick();

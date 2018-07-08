@@ -11,8 +11,9 @@ const MAIN_BATTLE_MENU_INDEX_LAST = MAIN_BATTLE_MENU_INDEX_COUNT - 1;
 
 const MAIN_BATTLE_MENU_INPUT_DELAY = 5;
 
-function MainBattleMenu() {
+function MainBattleMenu(character) {
   this.init = function() {
+    this.character = character;
     this.x = MAIN_BATTLE_MENU_X;
     this.y = MAIN_BATTLE_MENU_Y;
     this.width = MAIN_BATTLE_MENU_WIDTH;
@@ -21,6 +22,7 @@ function MainBattleMenu() {
     this.done = false;
     this.selectedIndex = MAIN_BATTLE_MENU_INDEX_ATTACK;
     this.subMenu = null;
+    this.selectedAction = null;
 
     this.inputDelayTimer = MAIN_BATTLE_MENU_INPUT_DELAY;
   };
@@ -33,6 +35,7 @@ function MainBattleMenu() {
         this.subMenu = null;
       }
       else if (this.subMenu.done) {
+        this.selectedAction = this.subMenu.selectedAction;
         this.done = true;
       }
       return;
@@ -56,7 +59,7 @@ function MainBattleMenu() {
         didPressButton = true;
       }
       else if (enterPressed) {
-        this.subMenu = new AttackTargetMenu();
+        this.subMenu = new AttackTargetMenu(this.character);
         didPressButton = true;
       }
 
