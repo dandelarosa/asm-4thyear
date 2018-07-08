@@ -28,7 +28,11 @@ function MainBattleMenu() {
 
   this.update = function() {
     if (this.subMenu) {
-      if (this.subMenu.done) {
+      this.subMenu.update();
+      if (this.subMenu.canceled) {
+        this.subMenu = null;
+      }
+      else if (this.subMenu.done) {
         this.done = true;
       }
       return;
@@ -49,6 +53,10 @@ function MainBattleMenu() {
         if (this.selectedIndex > MAIN_BATTLE_MENU_INDEX_LAST) {
           this.selectedIndex = 0;
         }
+        didPressButton = true;
+      }
+      else if (enterPressed) {
+        this.subMenu = new AttackTargetMenu();
         didPressButton = true;
       }
 

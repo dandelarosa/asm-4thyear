@@ -1,4 +1,5 @@
 const KEY_ENTER = 13;
+const KEY_ESC = 27;
 const KEY_SPACE = 32;
 const KEY_LEFT_ARROW = 37;
 const KEY_UP_ARROW = 38;
@@ -32,6 +33,7 @@ const KEY_Y = 89;
 const KEY_Z = 90;
 
 var enterPressed = false;
+var escapePressed = false;
 var spacePressed = false;
 var leftPressed = false;
 var upPressed = false;
@@ -48,6 +50,10 @@ function onKeydown(evt) {
   var keyUsed = false;
   if (evt.keyCode === KEY_ENTER) {
     enterPressed = true;
+    keyUsed = true;
+  }
+  if (evt.keyCode === KEY_ESC) {
+    escapePressed = true;
     keyUsed = true;
   }
   if (evt.keyCode === KEY_SPACE) {
@@ -83,6 +89,9 @@ function onKeydown(evt) {
 function onKeyup(evt) {
   if (evt.keyCode === KEY_ENTER) {
     enterPressed = false;
+  }
+  if (evt.keyCode === KEY_ESC) {
+    escapePressed = false;
   }
   if (evt.keyCode === KEY_SPACE) {
     spacePressed = false;
