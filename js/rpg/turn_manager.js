@@ -31,5 +31,11 @@ function TurnManager() {
 
   this.tick = function() {
     this.battleTimer++;
+
+    var nextCombatant = this.turnQueue[this.battleTimer];
+    while (!nextCombatant) {
+      this.battleTimer++;
+      nextCombatant = this.turnQueue[this.battleTimer];
+    }
   }
 }
