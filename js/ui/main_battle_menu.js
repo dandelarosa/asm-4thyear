@@ -7,6 +7,9 @@ const MAIN_BATTLE_MENU_INDEX_ATTACK = 0;
 const MAIN_BATTLE_MENU_INDEX_TECH = 1;
 const MAIN_BATTLE_MENU_INDEX_ITEM = 2;
 const MAIN_BATTLE_MENU_INDEX_COUNT = 3;
+const MAIN_BATTLE_MENU_INDEX_LAST = MAIN_BATTLE_MENU_INDEX_COUNT - 1;
+
+const MAIN_BATTLE_MENU_INPUT_DELAY = 5;
 
 function MainBattleMenu() {
   this.init = function() {
@@ -18,6 +21,8 @@ function MainBattleMenu() {
     this.done = false;
     this.selectedIndex = MAIN_BATTLE_MENU_INDEX_ATTACK;
     this.subMenu = null;
+
+    this.inputDelayTimer = MAIN_BATTLE_MENU_INPUT_DELAY;
   };
   this.init();
 
@@ -28,7 +33,32 @@ function MainBattleMenu() {
       }
       return;
     }
-    // TODO: check for button presses
+
+    if (this.inputDelayTimer === 0) {
+      var didPressButton = false;
+
+      if (upPressed) {
+        this.selectedIndex--;
+        if (this.selectedIndex < 0) {
+          this.selectedIndex = MAIN_BATTLE_MENU_INDEX_LAST;
+        }
+        didPressButton = true;
+      }
+      else if (downPressed) {
+        this.selectedIndex++;
+        if (this.selectedIndex > MAIN_BATTLE_MENU_INDEX_LAST) {
+          this.selectedIndex = 0;
+        }
+        didPressButton = true;
+      }
+
+      if (didPressButton) {
+        this.inputDelayTimer = MAIN_BATTLE_MENU_INPUT_DELAY;
+      }
+    }
+    else {
+      this.inputDelayTimer--;
+    }
   }
 
   this.draw = function() {

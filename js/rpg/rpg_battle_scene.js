@@ -16,6 +16,7 @@ function RPGBattleScene() {
   this.update = function() {
     if (this.currentTurnCombatant) {
       if (this.currentMenu) {
+        this.currentMenu.update();
         if (this.currentMenu.done) {
           this.currentMenu = null;
         }

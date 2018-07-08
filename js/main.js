@@ -15,6 +15,7 @@ window.addEventListener("load", function(event) {
 
   initGameState();
   currentScene = new LoadingLoadingScene();
+  setupInput();
   setInterval(eachFrame, 1000/FPS);
 });
 
