@@ -6,24 +6,43 @@ function RPGBattleScene() {
     this.turnManager = turnManager;
 
     this.currentTurnCombatant = null;
-    this.currentTurnCombatantName = "";
+    this.currentMenu = null;
+    this.currentAnimation = null;
+
+    this.currentDescription = "";
   };
   this.init();
 
   this.update = function() {
     if (this.currentTurnCombatant) {
-      // Do nothing for now; put back in the queue
-      this.turnManager.addCombatantToQueue(this.currentTurnCombatant);
-      this.currentTurnCombatant = null;
+      if (this.currentMenu) {
+        if (this.currentMenu.done) {
+          this.currentMenu = null;
+        }
+      }
+      else if (this.currentAnimation) {
+        if (this.currentAnimation.done) {
+          this.currentAnimation = null;
+        }
+      }
+      else {
+        this.turnManager.addCombatantToQueue(this.currentTurnCombatant);
+        this.currentTurnCombatant = null;
+      }
     }
     else {
       // Wait for the next character to make a move
       var currentTurnCombatant = this.turnManager.popCombatant();
       if (currentTurnCombatant) {
         this.currentTurnCombatant = currentTurnCombatant;
-        this.currentTurnCombatantName = currentTurnCombatant.name;
+        var currentTurnCombatantName = currentTurnCombatant.name;
+        this.currentDescription = currentTurnCombatantName + "'s Turn";
+        // TODO: skip menu if character is controlled by AI
+        this.currentMenu = new MainBattleMenu(100, 100);
       }
-      this.turnManager.tick();
+      else {
+        this.turnManager.tick();
+      }
     }
   };
 
@@ -52,9 +71,10 @@ function RPGBattleScene() {
       textY += 30;
     }
 
-    var turnText = this.currentTurnCombatantName + "'s Turn";
-    drawText(turnText, GAME_WIDTH/2, 420, 'black', 'center', 'top');
+    drawText(this.currentDescription, GAME_WIDTH/2, 420, 'black', 'center', 'top');
 
     drawText(this.turnManager.battleTimer, GAME_WIDTH/2, 450, 'black', 'center', 'top');
+
+    this.currentMenu && this.currentMenu.draw();
   };
 }
