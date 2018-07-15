@@ -122,7 +122,10 @@ function MainBattleMenu(character) {
       textY += 50;
     }
 
-    this.subMenu && this.subMenu.draw();
+    if (this.subMenu) {
+      drawRect(0, 0, this.width, this.height, 'rgba(0, 0, 0, 0.25)');
+      this.subMenu.draw();
+    }
 
     canvasContext.restore();
   }
