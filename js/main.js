@@ -18,6 +18,7 @@ window.addEventListener("load", function(event) {
   initBattleState();
   currentScene = new LoadingLoadingScene();
   setupInput();
+  setupMouse();
   setInterval(eachFrame, 1000/FPS);
 });
 
