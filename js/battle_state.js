@@ -20,3 +20,13 @@ function getAvailableTargets() {
   }
   return result;
 }
+
+function youWonTheBattle() {
+  for (var i = 0; i < enemies.length; i++) {
+    var enemy = enemies[i];
+    if (enemy.currentHP > 0) {
+      return false;
+    }
+  }
+  return true;
+}
