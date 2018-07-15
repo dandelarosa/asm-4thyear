@@ -17,7 +17,7 @@ window.addEventListener("load", function(event) {
   // This should only be called when you actually enter a battle, but we can put this here for now
   initBattleState();
   currentScene = new LoadingLoadingScene();
-  setupInput();
+  setupKeyboard();
   setupMouse();
   setInterval(eachFrame, 1000/FPS);
 });
