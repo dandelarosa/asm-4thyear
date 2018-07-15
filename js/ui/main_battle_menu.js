@@ -59,7 +59,8 @@ function MainBattleMenu(character) {
         didPressButton = true;
       }
       else if (enterPressed) {
-        this.subMenu = new AttackTargetMenu(this.character);
+        var targets = getAvailableTargets();
+        this.subMenu = new AttackTargetMenu(this.character, targets);
         didPressButton = true;
       }
 

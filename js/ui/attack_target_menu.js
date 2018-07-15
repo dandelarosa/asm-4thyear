@@ -5,9 +5,10 @@ const ATTACK_TARGET_MENU_HEIGHT = 200;
 
 const ATTACK_TARGET_MENU_INPUT_DELAY = 5;
 
-function AttackTargetMenu(character) {
+function AttackTargetMenu(character, enemies) {
   this.init = function() {
     this.character = character;
+    this.enemies = enemies;
     this.x = ATTACK_TARGET_MENU_X;
     this.y = ATTACK_TARGET_MENU_Y;
     this.width = ATTACK_TARGET_MENU_WIDTH;
@@ -33,19 +34,20 @@ function AttackTargetMenu(character) {
       else if (upPressed) {
         this.selectedIndex--;
         if (this.selectedIndex < 0) {
-          this.selectedIndex = enemies.length - 1;
+          this.selectedIndex = this.enemies.length - 1;
         }
         didPressButton = true;
       }
       else if (downPressed) {
         this.selectedIndex++;
-        if (this.selectedIndex > enemies.length - 1) {
+        if (this.selectedIndex > this.enemies.length - 1) {
           this.selectedIndex = 0;
         }
         didPressButton = true;
       }
       else if (enterPressed) {
-        this.selectedAction = new AttackAction(this.character, enemies[this.selectedIndex]);
+        var selectedEnemy = this.enemies[this.selectedIndex]
+        this.selectedAction = new AttackAction(this.character, selectedEnemy);
         this.done = true;
         didPressButton = true;
       }
@@ -68,8 +70,8 @@ function AttackTargetMenu(character) {
     canvasContext.font = '20px Times';
     var textX = 10;
     var textY = 10;
-    for (var i = 0; i < enemies.length; i++) {
-      var enemy = enemies[i];
+    for (var i = 0; i < this.enemies.length; i++) {
+      var enemy = this.enemies[i];
       var enemyName = enemy.name;
       var finalText;
       var fillStyle;

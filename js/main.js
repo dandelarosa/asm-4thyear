@@ -14,6 +14,8 @@ window.addEventListener("load", function(event) {
   canvasContext = canvas.getContext('2d');
 
   initGameState();
+  // This should only be called when you actually enter a battle, but we can put this here for now
+  initBattleState();
   currentScene = new LoadingLoadingScene();
   setupInput();
   setInterval(eachFrame, 1000/FPS);

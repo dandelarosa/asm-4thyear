@@ -1,9 +1,6 @@
 // These variables should be saved
 var partyMembers;
 
-// These variables shouldn't be saved
-var enemies;
-
 // Needs to wait until all scripts are loaded before calling this
 function initGameState() {
   partyMembers = [
@@ -27,10 +24,4 @@ function initGameState() {
     }
   ];
 
-  enemies = [
-    new BadGuy(),
-    new BadGuy(),
-    new BadGuy(),
-    new BadGuy()
-  ];
 }
