@@ -41,7 +41,7 @@ var rightPressed = false;
 var downPressed = false;
 var bPressed = false;
 
-function setupInput() {
+function setupKeyboard() {
   document.addEventListener('keydown', onKeydown);
 	document.addEventListener('keyup', onKeyup);
 }

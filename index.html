@@ -9,20 +9,31 @@
 
 <body>
   <!-- Install generic engine code first -->
-  <script src="js/engine/graphics_common.js"></script>
-  <script src="js/engine/input.js"></script>
+  <script src="js/engine/game_loop.js"></script>
+  <script src="js/engine/graphics.js"></script>
+  <script src="js/engine/keyboard.js"></script>
+  <script src="js/engine/mouse.js"></script>
   <!-- Then game-specific code -->
   <script src="js/loading/assets.js"></script>
   <script src="js/loading/loading_loading_scene.js"></script>
   <script src="js/loading/loading_scene.js"></script>
   <script src="js/loading/loading_screen_assets.js"></script>
   <script src="js/rpg/actions/attack_action.js"></script>
+  <script src="js/rpg/enemies/enemy.js"></script>
   <script src="js/rpg/enemies/bad_guy.js"></script>
+  <script src="js/rpg/heroes/hero.js"></script>
   <script src="js/rpg/rpg_battle_scene.js"></script>
   <script src="js/rpg/turn_manager.js"></script>
+  <script src="js/title_screen/credits_scene.js"></script>
+  <script src="js/title_screen/instructions_scene.js"></script>
+  <script src="js/title_screen/main_menu_scene.js"></script>
   <script src="js/ui/attack_target_menu.js"></script>
+  <script src="js/ui/item_menu.js"></script>
   <script src="js/ui/main_battle_menu.js"></script>
+  <script src="js/ui/tech_menu.js"></script>
+  <script src="js/ui/victory_menu.js"></script>
   <!-- Import top-level scripts here -->
+  <script src="js/battle_state.js"></script>
   <script src="js/game_state.js"></script>
   <!-- Always main.js import last -->
   <script src="js/main.js"></script>

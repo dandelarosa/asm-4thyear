@@ -14,6 +14,14 @@ function RPGBattleScene() {
   this.init();
 
   this.update = function() {
+    if (this.victoryMenu) {
+      this.victoryMenu.update();
+      if (this.victoryMenu.done) {
+        nextScene = new MainMenuScene();
+      }
+      return;
+    }
+
     if (this.currentTurnCombatant) {
       if (this.currentMenu) {
         this.currentMenu.update();
@@ -33,6 +41,9 @@ function RPGBattleScene() {
         this.currentTurnCombatant = null;
       }
     }
+    else if (youWonTheBattle()) {
+      this.victoryMenu = new VictoryMenu();
+    }
     else {
       // Wait for the next character to make a move
       var currentTurnCombatant = this.turnManager.popCombatant();
@@ -40,8 +51,13 @@ function RPGBattleScene() {
         this.currentTurnCombatant = currentTurnCombatant;
         var currentTurnCombatantName = currentTurnCombatant.name;
         this.currentDescription = currentTurnCombatantName + "'s Turn";
-        // TODO: skip menu if character is controlled by AI
-        this.currentMenu = new MainBattleMenu(currentTurnCombatant);
+
+        if (currentTurnCombatant.canControl) {
+          this.currentMenu = new MainBattleMenu(currentTurnCombatant);
+        }
+        else {
+          // TODO: Implement enemy's turn
+        }
       }
       else {
         this.turnManager.tick();
@@ -79,5 +95,7 @@ function RPGBattleScene() {
     drawText(this.turnManager.battleTimer, GAME_WIDTH/2, 450, 'black', 'center', 'top');
 
     this.currentMenu && this.currentMenu.draw();
+
+    this.victoryMenu && this.victoryMenu.draw();
   };
 }
