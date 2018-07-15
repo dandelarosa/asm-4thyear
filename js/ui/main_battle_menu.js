@@ -9,8 +9,6 @@ const MAIN_BATTLE_MENU_INDEX_ITEM = 2;
 const MAIN_BATTLE_MENU_INDEX_COUNT = 3;
 const MAIN_BATTLE_MENU_INDEX_LAST = MAIN_BATTLE_MENU_INDEX_COUNT - 1;
 
-const MAIN_BATTLE_MENU_INPUT_DELAY = 5;
-
 function MainBattleMenu(character) {
   this.init = function() {
     this.character = character;
@@ -24,7 +22,8 @@ function MainBattleMenu(character) {
     this.subMenu = null;
     this.selectedAction = null;
 
-    this.inputDelayTimer = MAIN_BATTLE_MENU_INPUT_DELAY;
+    this.inputDelay = 5;
+    this.inputDelayTimer = this.inputDelay;
   };
   this.init();
 
@@ -59,13 +58,23 @@ function MainBattleMenu(character) {
         didPressButton = true;
       }
       else if (enterPressed) {
-        var targets = getAvailableTargets();
-        this.subMenu = new AttackTargetMenu(this.character, targets);
+        if (this.selectedIndex === MAIN_BATTLE_MENU_INDEX_ATTACK) {
+          var targets = getAvailableTargets();
+          this.subMenu = new AttackTargetMenu(this.character, targets);
+        }
+        else if (this.selectedIndex === MAIN_BATTLE_MENU_INDEX_TECH) {
+          console.log("Warning: Tech Menu not implemented yet");
+          this.subMenu = new TechMenu();
+        }
+        else if (this.selectedIndex === MAIN_BATTLE_MENU_INDEX_ITEM) {
+          console.log("Warning: Item Menu not implemented yet");
+          this.subMenu = new ItemMenu();
+        }
         didPressButton = true;
       }
 
       if (didPressButton) {
-        this.inputDelayTimer = MAIN_BATTLE_MENU_INPUT_DELAY;
+        this.inputDelayTimer = this.inputDelay;
       }
     }
     else {

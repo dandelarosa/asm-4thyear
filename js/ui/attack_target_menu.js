@@ -3,8 +3,6 @@ const ATTACK_TARGET_MENU_Y = 0;
 const ATTACK_TARGET_MENU_WIDTH = 130;
 const ATTACK_TARGET_MENU_HEIGHT = 200;
 
-const ATTACK_TARGET_MENU_INPUT_DELAY = 5;
-
 function AttackTargetMenu(character, enemies) {
   this.init = function() {
     this.character = character;
@@ -19,7 +17,8 @@ function AttackTargetMenu(character, enemies) {
     this.selectedIndex = 0;
     this.selectedAction = null;
 
-    this.inputDelayTimer = ATTACK_TARGET_MENU_INPUT_DELAY;
+    this.inputDelay = 5;
+    this.inputDelayTimer = this.inputDelay;
   };
   this.init();
 
@@ -53,7 +52,7 @@ function AttackTargetMenu(character, enemies) {
       }
 
       if (didPressButton) {
-        this.inputDelayTimer = MAIN_BATTLE_MENU_INPUT_DELAY;
+        this.inputDelayTimer = this.inputDelay;
       }
     }
     else {
