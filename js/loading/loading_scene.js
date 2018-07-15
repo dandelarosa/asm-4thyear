@@ -7,7 +7,7 @@ function LoadingScene() {
 
   this.update = function() {
     if (this.loadTimer === 0) {
-      nextScene = new RPGBattleScene();
+      nextScene = new MainMenuScene();
     }
     else {
       this.loadTimer--;
