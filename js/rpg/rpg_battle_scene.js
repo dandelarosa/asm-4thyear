@@ -7,6 +7,7 @@ function RPGBattleScene() {
 
     this.currentTurnCombatant = null;
     this.currentMenu = null;
+    this.currentAI = null;
     this.currentAnimation = null;
 
     this.currentDescription = "";
@@ -30,6 +31,11 @@ function RPGBattleScene() {
           currentAction.applyEffects();
           this.currentMenu = null;
         }
+      }
+      else if (this.currentAI) {
+        var currentAction = this.currentAI.getSelectedAction();
+        currentAction.applyEffects();
+        this.currentAI = null;
       }
       else if (this.currentAnimation) {
         if (this.currentAnimation.done) {
@@ -56,7 +62,7 @@ function RPGBattleScene() {
           this.currentMenu = new MainBattleMenu(currentTurnCombatant);
         }
         else {
-          // TODO: Implement enemy's turn
+          this.currentAI = new EnemyAI(currentTurnCombatant);
         }
       }
       else {
