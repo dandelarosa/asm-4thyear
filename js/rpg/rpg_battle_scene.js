@@ -14,10 +14,21 @@ function RPGBattleScene() {
   };
   this.init();
 
+  this.victoryMenu = null;
+  this.defeatMenu = null;
+
   this.update = function() {
     if (this.victoryMenu) {
       this.victoryMenu.update();
       if (this.victoryMenu.done) {
+        nextScene = new MainMenuScene();
+      }
+      return;
+    }
+    else if (this.defeatMenu) {
+      this.defeatMenu.update();
+      if (this.defeatMenu.done) {
+        makeSureOnePartyMemberIsAlive();
         nextScene = new MainMenuScene();
       }
       return;
@@ -49,6 +60,9 @@ function RPGBattleScene() {
     }
     else if (youWonTheBattle()) {
       this.victoryMenu = new VictoryMenu();
+    }
+    else if (youLostTheBattle()) {
+      this.defeatMenu = new DefeatMenu();
     }
     else {
       // Wait for the next character to make a move
@@ -103,5 +117,6 @@ function RPGBattleScene() {
     this.currentMenu && this.currentMenu.draw();
 
     this.victoryMenu && this.victoryMenu.draw();
+    this.defeatMenu && this.defeatMenu.draw();
   };
 }
