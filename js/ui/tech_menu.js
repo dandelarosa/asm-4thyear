@@ -14,7 +14,7 @@ function TechMenu() {
     if (this.inputDelayTimer === 0) {
       var didPressButton = false;
 
-      if (escapePressed) {
+      if (cancelPressed()) {
         this.canceled = true;
         didPressButton = true;
       }

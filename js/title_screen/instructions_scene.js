@@ -6,7 +6,7 @@ function InstructionsScene() {
     if (this.inputDelayTimer === 0) {
       var didPressButton = false;
 
-      if (escapePressed) {
+      if (cancelPressed()) {
         nextScene = new MainMenuScene();
         didPressButton = true;
       }
@@ -26,11 +26,32 @@ function InstructionsScene() {
     canvasContext.font = '48px Times';
     drawText('How to Play', GAME_WIDTH/2, 40, 'black', 'center', 'middle');
 
-    canvasContext.font = '20px Times';
-    drawText('arrow keys: move character / change options', GAME_WIDTH/2, 230, 'black', 'center', 'middle');
-    drawText('enter key: perform action / confirm option', GAME_WIDTH/2, 280, 'black', 'center', 'middle');
-    drawText('escape key: cancel action / go back', GAME_WIDTH/2, 330, 'black', 'center', 'middle');
+    var textY = 150;
 
-    drawText('Press Escape to go back', GAME_WIDTH/2, 450, 'black', 'center', 'middle');
+    canvasContext.font = 'bold 20px Times';
+    drawText('arrow keys', GAME_WIDTH/2, textY, 'black', 'center', 'middle');
+    textY += 30;
+
+    canvasContext.font = '20px Times';
+    drawText('move character / change options', GAME_WIDTH/2, textY, 'black', 'center', 'middle');
+    textY += 40;
+
+    canvasContext.font = 'bold 20px Times';
+    drawText('enter / z', GAME_WIDTH/2, textY, 'black', 'center', 'middle');
+    textY += 30;
+
+    canvasContext.font = '20px Times';
+    drawText('perform action / confirm option', GAME_WIDTH/2, textY, 'black', 'center', 'middle');
+    textY += 40;
+
+    canvasContext.font = 'bold 20px Times';
+    drawText('escape / x', GAME_WIDTH/2, textY, 'black', 'center', 'middle');
+    textY += 30;
+
+    canvasContext.font = '20px Times';
+    drawText('cancel action / go back', GAME_WIDTH/2, textY, 'black', 'center', 'middle');
+    textY += 40;
+
+    drawText('Escape to go back', GAME_WIDTH/2, 450, 'black', 'center', 'middle');
   }
 }

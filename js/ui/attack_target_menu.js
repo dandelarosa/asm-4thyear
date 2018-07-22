@@ -26,7 +26,7 @@ function AttackTargetMenu(character, enemies) {
     if (this.inputDelayTimer === 0) {
       var didPressButton = false;
 
-      if (escapePressed) {
+      if (cancelPressed()) {
         this.canceled = true;
         didPressButton = true;
       }
@@ -44,7 +44,7 @@ function AttackTargetMenu(character, enemies) {
         }
         didPressButton = true;
       }
-      else if (enterPressed) {
+      else if (confirmPressed()) {
         var selectedEnemy = this.enemies[this.selectedIndex]
         this.selectedAction = new AttackAction(this.character, selectedEnemy);
         this.done = true;

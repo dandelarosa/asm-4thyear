@@ -13,7 +13,7 @@ function VictoryMenu() {
     if (this.inputDelayTimer === 0) {
       var didPressButton = false;
 
-      if (enterPressed) {
+      if (confirmPressed()) {
         this.done = true;
         didPressButton = true;
       }

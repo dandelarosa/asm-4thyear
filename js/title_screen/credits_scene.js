@@ -6,7 +6,7 @@ function CreditsScene() {
     if (this.inputDelayTimer === 0) {
       var didPressButton = false;
 
-      if (escapePressed) {
+      if (cancelPressed()) {
         nextScene = new MainMenuScene();
         didPressButton = true;
       }

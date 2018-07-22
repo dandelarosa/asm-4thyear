@@ -27,7 +27,7 @@ function MainMenuScene() {
         }
         didPressButton = true;
       }
-      else if (enterPressed) {
+      else if (confirmPressed()) {
         var selectedOption = this.options[this.selectedIndex];
         if (selectedOption === "Instructions") {
           nextScene = new InstructionsScene();

@@ -40,6 +40,8 @@ var upPressed = false;
 var rightPressed = false;
 var downPressed = false;
 var bPressed = false;
+var xPressed = false;
+var zPressed = false;
 
 function setupKeyboard() {
   document.addEventListener('keydown', onKeydown);
@@ -80,6 +82,14 @@ function onKeydown(evt) {
     bPressed = true;
     keyUsed = true;
   }
+  if (evt.keyCode === KEY_X) {
+    xPressed = true;
+    keyUsed = true;
+  }
+  if (evt.keyCode === KEY_Z) {
+    zPressed = true;
+    keyUsed = true;
+  }
 
   if (keyUsed) {
     evt.preventDefault();
@@ -110,5 +120,11 @@ function onKeyup(evt) {
   }
   if (evt.keyCode === KEY_B) {
     bPressed = false;
+  }
+  if (evt.keyCode === KEY_X) {
+    xPressed = false;
+  }
+  if (evt.keyCode === KEY_Z) {
+    zPressed = false;
   }
 }
