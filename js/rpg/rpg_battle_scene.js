@@ -7,16 +7,28 @@ function RPGBattleScene() {
 
     this.currentTurnCombatant = null;
     this.currentMenu = null;
+    this.currentAI = null;
     this.currentAnimation = null;
 
     this.currentDescription = "";
   };
   this.init();
 
+  this.victoryMenu = null;
+  this.defeatMenu = null;
+
   this.update = function() {
     if (this.victoryMenu) {
       this.victoryMenu.update();
       if (this.victoryMenu.done) {
+        nextScene = new MainMenuScene();
+      }
+      return;
+    }
+    else if (this.defeatMenu) {
+      this.defeatMenu.update();
+      if (this.defeatMenu.done) {
+        makeSureOnePartyMemberIsAlive();
         nextScene = new MainMenuScene();
       }
       return;
@@ -31,6 +43,11 @@ function RPGBattleScene() {
           this.currentMenu = null;
         }
       }
+      else if (this.currentAI) {
+        var currentAction = this.currentAI.getSelectedAction();
+        currentAction.applyEffects();
+        this.currentAI = null;
+      }
       else if (this.currentAnimation) {
         if (this.currentAnimation.done) {
           this.currentAnimation = null;
@@ -44,6 +61,9 @@ function RPGBattleScene() {
     else if (youWonTheBattle()) {
       this.victoryMenu = new VictoryMenu();
     }
+    else if (youLostTheBattle()) {
+      this.defeatMenu = new DefeatMenu();
+    }
     else {
       // Wait for the next character to make a move
       var currentTurnCombatant = this.turnManager.popCombatant();
@@ -56,7 +76,7 @@ function RPGBattleScene() {
           this.currentMenu = new MainBattleMenu(currentTurnCombatant);
         }
         else {
-          // TODO: Implement enemy's turn
+          this.currentAI = new EnemyAI(currentTurnCombatant);
         }
       }
       else {
@@ -97,5 +117,6 @@ function RPGBattleScene() {
     this.currentMenu && this.currentMenu.draw();
 
     this.victoryMenu && this.victoryMenu.draw();
+    this.defeatMenu && this.defeatMenu.draw();
   };
 }

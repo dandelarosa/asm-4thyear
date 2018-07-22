@@ -30,3 +30,13 @@ function youWonTheBattle() {
   }
   return true;
 }
+
+function youLostTheBattle() {
+  for (var i = 0; i < partyMembers.length; i++) {
+    var hero = partyMembers[i];
+    if (hero.currentHP > 0) {
+      return false;
+    }
+  }
+  return true;
+}

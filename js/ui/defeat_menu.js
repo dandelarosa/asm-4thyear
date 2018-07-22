@@ -1,10 +1,9 @@
-function ItemMenu() {
-  this.x = 150;
-  this.y = 0;
-  this.width = 130;
+function DefeatMenu() {
+  this.x = 20;
+  this.y = 20;
+  this.width = 600;
   this.height = 200;
 
-  this.canceled = false;
   this.done = false;
 
   this.inputDelay = 5;
@@ -14,8 +13,8 @@ function ItemMenu() {
     if (this.inputDelayTimer === 0) {
       var didPressButton = false;
 
-      if (cancelPressed()) {
-        this.canceled = true;
+      if (confirmPressed()) {
+        this.done = true;
         didPressButton = true;
       }
 
@@ -33,6 +32,14 @@ function ItemMenu() {
     canvasContext.save();
     canvasContext.translate(this.x, this.y);
     drawRect(0, 0, this.width, this.height, '#0066cc');
+
+    canvasContext.font = '48px Times';
+    drawText('You Lost!', this.width/2, 40, 'black', 'center', 'middle');
+
+    canvasContext.font = '30px Times';
+
+    drawText('Press Enter to continue', this.width/2, 140, 'black', 'center', 'middle');
+
     canvasContext.restore();
   };
 }

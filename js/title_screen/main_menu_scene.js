@@ -1,8 +1,14 @@
+const MAIN_MENU_OPTION_INN = "Go to Inn";
+const MAIN_MENU_OPTION_INSTRUCTIONS = "Instructions";
+const MAIN_MENU_OPITON_CREDITS = "Credits";
+
 function MainMenuScene() {
   this.options = [
-    "Start Battle",
-    "Instructions",
-    "Credits",
+    "Fight Formation 1",
+    "Fight Formation 2",
+    MAIN_MENU_OPTION_INN,
+    MAIN_MENU_OPTION_INSTRUCTIONS,
+    MAIN_MENU_OPITON_CREDITS,
   ];
   this.selectedIndex = 0;
   this.inputDelay = 5;
@@ -26,16 +32,20 @@ function MainMenuScene() {
         }
         didPressButton = true;
       }
-      else if (enterPressed) {
+      else if (confirmPressed()) {
         var selectedOption = this.options[this.selectedIndex];
-        if (selectedOption === "Start Battle") {
-          nextScene = new RPGBattleScene();
-        }
-        else if (selectedOption === "Instructions") {
+        if (selectedOption === MAIN_MENU_OPTION_INSTRUCTIONS) {
           nextScene = new InstructionsScene();
         }
-        else if (selectedOption === "Credits") {
+        else if (selectedOption === MAIN_MENU_OPITON_CREDITS) {
           nextScene = new CreditsScene();
+        }
+        else if (selectedOption === MAIN_MENU_OPTION_INN) {
+          nextScene = new InnScene();
+        }
+        else {
+          setupBattleFormationForSelectedOption(selectedOption);
+          nextScene = new RPGBattleScene();
         }
         didPressButton = true;
       }

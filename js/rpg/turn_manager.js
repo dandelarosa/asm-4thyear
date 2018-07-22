@@ -30,12 +30,20 @@ function TurnManager() {
   }
 
   this.tick = function() {
-    this.battleTimer++;
-
-    var nextCombatant = this.turnQueue[this.battleTimer];
-    while (!nextCombatant) {
+    while (!this.getCombatantForTime(this.battleTimer)) {
       this.battleTimer++;
-      nextCombatant = this.turnQueue[this.battleTimer];
     }
+  }
+
+  this.getCombatantForTime = function(time) {
+    var nextCombatant = this.turnQueue[this.battleTimer];
+    if (!nextCombatant) {
+      return null;
+    }
+    else if (nextCombatant.currentHP <= 0) {
+      console.log("Oh no! " + nextCombatant.name + " is dead. Removing from queue.");
+      return null;
+    }
+    return nextCombatant;
   }
 }

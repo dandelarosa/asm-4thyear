@@ -57,7 +57,7 @@ function MainBattleMenu(character) {
         }
         didPressButton = true;
       }
-      else if (enterPressed) {
+      else if (confirmPressed()) {
         if (this.selectedIndex === MAIN_BATTLE_MENU_INDEX_ATTACK) {
           var targets = getAvailableTargets();
           this.subMenu = new AttackTargetMenu(this.character, targets);
