@@ -1,6 +1,7 @@
 function MainMenuScene() {
   this.options = [
-    "Start Battle",
+    "Fight Formation 1",
+    "Fight Formation 2",
     "Instructions",
     "Credits",
   ];
@@ -28,14 +29,15 @@ function MainMenuScene() {
       }
       else if (enterPressed) {
         var selectedOption = this.options[this.selectedIndex];
-        if (selectedOption === "Start Battle") {
-          nextScene = new RPGBattleScene();
-        }
-        else if (selectedOption === "Instructions") {
+        if (selectedOption === "Instructions") {
           nextScene = new InstructionsScene();
         }
         else if (selectedOption === "Credits") {
           nextScene = new CreditsScene();
+        }
+        else {
+          setupBattleFormationForSelectedOption(selectedOption);
+          nextScene = new RPGBattleScene();
         }
         didPressButton = true;
       }
