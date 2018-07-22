@@ -1,9 +1,14 @@
+const MAIN_MENU_OPTION_INN = "Go to Inn";
+const MAIN_MENU_OPTION_INSTRUCTIONS = "Instructions";
+const MAIN_MENU_OPITON_CREDITS = "Credits";
+
 function MainMenuScene() {
   this.options = [
     "Fight Formation 1",
     "Fight Formation 2",
-    "Instructions",
-    "Credits",
+    MAIN_MENU_OPTION_INN,
+    MAIN_MENU_OPTION_INSTRUCTIONS,
+    MAIN_MENU_OPITON_CREDITS,
   ];
   this.selectedIndex = 0;
   this.inputDelay = 5;
@@ -29,11 +34,14 @@ function MainMenuScene() {
       }
       else if (confirmPressed()) {
         var selectedOption = this.options[this.selectedIndex];
-        if (selectedOption === "Instructions") {
+        if (selectedOption === MAIN_MENU_OPTION_INSTRUCTIONS) {
           nextScene = new InstructionsScene();
         }
-        else if (selectedOption === "Credits") {
+        else if (selectedOption === MAIN_MENU_OPITON_CREDITS) {
           nextScene = new CreditsScene();
+        }
+        else if (selectedOption === MAIN_MENU_OPTION_INN) {
+          nextScene = new InnScene();
         }
         else {
           setupBattleFormationForSelectedOption(selectedOption);
