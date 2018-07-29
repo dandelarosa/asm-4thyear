@@ -3,10 +3,10 @@ var enemies;
 
 function initBattleState() {
   enemies = [
-    new BadGuy(),
-    new BadGuy(),
-    new BadGuy(),
-    new BadGuy()
+    new BadGuy(1),
+    new BadGuy(1),
+    new BadGuy(1),
+    new BadGuy(1)
   ];
 }
 

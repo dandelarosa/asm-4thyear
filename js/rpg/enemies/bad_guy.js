@@ -1,10 +1,14 @@
-function BadGuy() {
-  Enemy.call(this);
+function BadGuy(level) {
+  Enemy.call(this, level);
 
   this.name = "Bad Guy";
-  this.currentHP = 100;
-  this.maxHP = 100;
+  this.level1HP = 100;
+  this.perLevelHP = 10;
   this.ticksToNextTurn = 100;
+
+  // HACK: force recalculate stats
+  this.setLevel(level);
+  this.currentHP = this.maxHP;
 }
 
 BadGuy.prototype = Object.create(Enemy.prototype);

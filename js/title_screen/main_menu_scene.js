@@ -1,4 +1,6 @@
 const MAIN_MENU_OPTION_INN = "Go to Inn";
+const MAIN_MENU_OPTION_SAVE = "Save Game";
+const MAIN_MENU_OPTION_LOAD = "Load Game";
 const MAIN_MENU_OPTION_INSTRUCTIONS = "Instructions";
 const MAIN_MENU_OPITON_CREDITS = "Credits";
 
@@ -6,7 +8,10 @@ function MainMenuScene() {
   this.options = [
     "Fight Formation 1",
     "Fight Formation 2",
+    "Fight Formation 3",
     MAIN_MENU_OPTION_INN,
+    MAIN_MENU_OPTION_SAVE,
+    MAIN_MENU_OPTION_LOAD,
     MAIN_MENU_OPTION_INSTRUCTIONS,
     MAIN_MENU_OPITON_CREDITS,
   ];
@@ -39,6 +44,12 @@ function MainMenuScene() {
         }
         else if (selectedOption === MAIN_MENU_OPITON_CREDITS) {
           nextScene = new CreditsScene();
+        }
+        else if (selectedOption === MAIN_MENU_OPTION_SAVE) {
+          saveGameToSlot(1);
+        }
+        else if (selectedOption === MAIN_MENU_OPTION_LOAD) {
+          loadGameFromSlot(1);
         }
         else if (selectedOption === MAIN_MENU_OPTION_INN) {
           nextScene = new InnScene();
@@ -86,6 +97,23 @@ function MainMenuScene() {
       drawText(optionText, menuOptionX, menuOptionY, optionColor, 'left', 'top');
 
       menuOptionY += 40;
+    }
+
+    var heroTextX = 300;
+    var heroTextY = 150;
+
+    drawText("Your Heroes", heroTextX, heroTextY, 'black', 'left', 'top');
+    heroTextY += 40;
+
+    for (var i = 0; i < partyMembers.length; i++) {
+      var hero = partyMembers[i];
+      drawText(hero.name, heroTextX, heroTextY, 'black', 'left', 'top');
+
+      heroTextY += 30; 
+      var heroStatsText = "Level " + hero.level + " HP: " + hero.currentHP + "/" + hero.maxHP;
+      drawText(heroStatsText, heroTextX, heroTextY, 'black', 'left', 'top');
+
+      heroTextY += 40;
     }
   }
 }

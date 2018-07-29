@@ -99,14 +99,15 @@ function RPGBattleScene() {
       textY += 30;
     }
 
-    textX = 400;
+    textX = 350;
     textY = 20;
     for (var i = 0; i < enemies.length; i++) {
       var enemy = enemies[i];
       canvasContext.font = '20px Times';
-      drawText(enemy.name, textX, textY, 'black', 'left', 'top');
+      var enemyText = enemy.name + " Lv. " + enemy.level;
+      drawText(enemyText, textX, textY, 'black', 'left', 'top');
       var HPText = 'HP: ' + enemy.currentHP + ' / ' + enemy.maxHP;
-      drawText(HPText, textX + 220, textY, 'black', 'right', 'top');
+      drawText(HPText, textX + 250, textY, 'black', 'right', 'top');
       textY += 30;
     }
 

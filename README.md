@@ -9,7 +9,7 @@ It's highly recommended that this game is run on a local webserver during develo
 npm install http-server -g
 ```
 
-Launch the web server by calling `http-server -p 8000`, and then open the game in your browser by going to http://localhost:8000/.
+Launch the web server by calling `http-server -p 8000`, and then open the game in your browser by going to http://localhost:8000/embed.html.
 
 # How to Upload to itch.io (for Mac anyway)
 
