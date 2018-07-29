@@ -15,6 +15,25 @@ function initGameState() {
 
 }
 
+function getPartyMembersSaveState() {
+  var saveState = [];
+  for (var i = 0; i < partyMembers.length; i++) {
+    var partyMember = partyMembers[i];
+    var partyMemeberSaveState = partyMember.getSaveState();
+    saveState.push(partyMemeberSaveState);
+  }
+  return saveState;
+}
+
+function loadPartyMembersSaveState(saveState) {
+  partyMembers = [];
+  for (var i = 0; i < saveState.length; i++) {
+    var partyMemeberSaveState = saveState[i];
+    var partyMember = heroFromSaveState(partyMemeberSaveState);
+    partyMembers.push(partyMember);
+  }
+}
+
 function makeSureOnePartyMemberIsAlive() {
   partyMembers[0].currentHP = 1;
 }

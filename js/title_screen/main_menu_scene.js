@@ -1,4 +1,6 @@
 const MAIN_MENU_OPTION_INN = "Go to Inn";
+const MAIN_MENU_OPTION_SAVE = "Save Game";
+const MAIN_MENU_OPTION_LOAD = "Load Game";
 const MAIN_MENU_OPTION_INSTRUCTIONS = "Instructions";
 const MAIN_MENU_OPITON_CREDITS = "Credits";
 
@@ -7,6 +9,8 @@ function MainMenuScene() {
     "Fight Formation 1",
     "Fight Formation 2",
     MAIN_MENU_OPTION_INN,
+    MAIN_MENU_OPTION_SAVE,
+    MAIN_MENU_OPTION_LOAD,
     MAIN_MENU_OPTION_INSTRUCTIONS,
     MAIN_MENU_OPITON_CREDITS,
   ];
@@ -39,6 +43,12 @@ function MainMenuScene() {
         }
         else if (selectedOption === MAIN_MENU_OPITON_CREDITS) {
           nextScene = new CreditsScene();
+        }
+        else if (selectedOption === MAIN_MENU_OPTION_SAVE) {
+          saveGameToSlot(1);
+        }
+        else if (selectedOption === MAIN_MENU_OPTION_LOAD) {
+          loadGameFromSlot(1);
         }
         else if (selectedOption === MAIN_MENU_OPTION_INN) {
           nextScene = new InnScene();
