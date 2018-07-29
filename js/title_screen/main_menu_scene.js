@@ -8,6 +8,7 @@ function MainMenuScene() {
   this.options = [
     "Fight Formation 1",
     "Fight Formation 2",
+    "Fight Formation 3",
     MAIN_MENU_OPTION_INN,
     MAIN_MENU_OPTION_SAVE,
     MAIN_MENU_OPTION_LOAD,
