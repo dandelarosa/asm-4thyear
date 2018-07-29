@@ -97,5 +97,22 @@ function MainMenuScene() {
 
       menuOptionY += 40;
     }
+
+    var heroTextX = 300;
+    var heroTextY = 150;
+
+    drawText("Your Heroes", heroTextX, heroTextY, 'black', 'left', 'top');
+    heroTextY += 40;
+
+    for (var i = 0; i < partyMembers.length; i++) {
+      var hero = partyMembers[i];
+      drawText(hero.name, heroTextX, heroTextY, 'black', 'left', 'top');
+
+      heroTextY += 30; 
+      var heroStatsText = "Level " + hero.level + " HP: " + hero.currentHP + "/" + hero.maxHP;
+      drawText(heroStatsText, heroTextX, heroTextY, 'black', 'left', 'top');
+
+      heroTextY += 40;
+    }
   }
 }
