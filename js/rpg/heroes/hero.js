@@ -1,17 +1,32 @@
-function Hero() {
+function Hero(level) {
   this.canControl = true;
 
   // These properties should be customized per hero
   this.name = "Hero";
-  this.maxHP = 100;
-  this.currentHP = this.maxHP;
+  this.level1HP = 100;
+  this.perLevelHP = 10;
   this.ticksToNextTurn = 40;
+
+  // These properties are calculated using the hero's level
+  this.maxHP = 0;
+
+  // These properties should be saved in the game state
+  this.currentHP = 0;
+
+  this.setLevel = function(level) {
+    this.level = level;
+    this.maxHP = this.level1HP + this.perLevelHP * (level - 1);
+  }
+  this.setLevel(level);
+
+  // Don't heal on level up (for now)
+  this.currentHP = this.maxHP;
 
   this.getSaveState = function() {
     var saveState = {
       // Name is used to determine which hero class to load
       name: this.name,
-      maxHP: this.maxHP,
+      level: this.level,
       currentHP: this.currentHP,
       // Don't save ticksToNextTurn since it's tied to the hero subclass
     };
@@ -19,8 +34,7 @@ function Hero() {
   }
 
   this.loadSaveState = function(saveState) {
-    // Don't load since it's tied to the hero subclass
-    this.maxHP = saveState.maxHP;
+    // All stats should've been calculated previously
     this.currentHP = saveState.currentHP;
   }
 }
@@ -39,7 +53,8 @@ function heroFromSaveState(saveState) {
   if (!heroClass) {
     return null;
   }
-  var hero = new heroClass();
+  var heroLevel = saveState.level;
+  var hero = new heroClass(heroLevel);
   if (hero) {
     hero.loadSaveState(saveState);
   }
@@ -47,35 +62,47 @@ function heroFromSaveState(saveState) {
   return hero;
 }
 
-function David() {
-  Hero.call(this);
+function David(level) {
+  Hero.call(this, level);
 
   this.name = "David";
-  this.maxHP = 100;
-  this.currentHP = this.maxHP;
+  this.level1HP = 100;
+  this.perLevelHP = 10;
   this.ticksToNextTurn = 40;
+
+  // HACK: force recalculate stats
+  this.setLevel(level);
+  this.currentHP = this.maxHP;
 }
 
 David.prototype = Object.create(Hero.prototype);
 David.prototype.constructor = David;
 
-function Shane() {
-  Hero.call(this);
+function Shane(level) {
+  Hero.call(this, level);
 
   this.name = "Shane";
-  this.maxHP = 100;
-  this.currentHP = this.maxHP;
+  this.level1HP = 100;
+  this.perLevelHP = 10;
   this.ticksToNextTurn = 50;
+
+  // HACK: force recalculate stats
+  this.setLevel(level);
+  this.currentHP = this.maxHP;
 }
 
 Shane.prototype = Object.create(Hero.prototype);
 Shane.prototype.constructor = Shane;
 
-function Luke() {
-  Hero.call(this);
+function Luke(level) {
+  Hero.call(this, level);
 
   this.name = "Luke";
-  this.maxHP = 100;
-  this.currentHP = this.maxHP;
+  this.level1HP = 100;
+  this.perLevelHP = 10;
   this.ticksToNextTurn = 60;
+
+  // HACK: force recalculate stats
+  this.setLevel(level);
+  this.currentHP = this.maxHP;
 }

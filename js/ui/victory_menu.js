@@ -9,7 +9,17 @@ function VictoryMenu() {
   this.inputDelay = 5;
   this.inputDelayTimer = this.inputDelay;
 
+  this.didLevelUp = false;
+
   this.update = function() {
+    if (!this.didLevelUp) {
+      for (var i = 0; i < partyMembers.length; i++) {
+        var partyMember = partyMembers[i];
+        partyMember.setLevel(partyMember.level + 1);
+      }
+      this.didLevelUp = true;
+    }
+
     if (this.inputDelayTimer === 0) {
       var didPressButton = false;
 
@@ -38,7 +48,9 @@ function VictoryMenu() {
 
     canvasContext.font = '30px Times';
 
-    drawText('Press Enter to continue', this.width/2, 140, 'black', 'center', 'middle');
+    drawText('Level Up!', this.width/2, 120, 'black', 'center', 'middle');
+
+    drawText('Press Enter to continue', this.width/2, 150, 'black', 'center', 'middle');
 
     canvasContext.restore();
   };
